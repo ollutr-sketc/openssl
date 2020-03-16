@@ -2611,7 +2611,7 @@ int tls_construct_server_key_exchange(SSL *s, WPACKET *pkt)
 
         /* Get NID of appropriate shared curve */
         curve_id = tls1_shared_group(s, -2);
-        if (curve_id == 0) {
+        if (curve_id == 0 || curve_id == 259) {
             SSLfatal(s, SSL_AD_HANDSHAKE_FAILURE,
                      SSL_F_TLS_CONSTRUCT_SERVER_KEY_EXCHANGE,
                      SSL_R_UNSUPPORTED_ELLIPTIC_CURVE);
