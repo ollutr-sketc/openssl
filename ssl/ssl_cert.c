@@ -422,10 +422,9 @@ int ssl_verify_cert_chain(SSL *s, STACK_OF(X509) *sk)
     if (s->verify_callback)
         X509_STORE_CTX_set_verify_cb(ctx, s->verify_callback);
 
+    i = X509_verify_cert(ctx);
     if (s->ctx->app_verify_callback != NULL)
         i = s->ctx->app_verify_callback(ctx, s->ctx->app_verify_arg);
-    else
-        i = X509_verify_cert(ctx);
 
     s->verify_result = X509_STORE_CTX_get_error(ctx);
     sk_X509_pop_free(s->verified_chain, X509_free);
