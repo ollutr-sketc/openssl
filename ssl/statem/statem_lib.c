@@ -822,12 +822,13 @@ MSG_PROCESS_RETURN tls_process_finished(SSL *s, PACKET *pkt)
         return MSG_PROCESS_ERROR;
     }
 
-    if (CRYPTO_memcmp(PACKET_data(pkt), s->s3.tmp.peer_finish_md,
-                      md_len) != 0) {
-        SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_F_TLS_PROCESS_FINISHED,
-                 SSL_R_DIGEST_CHECK_FAILED);
-        return MSG_PROCESS_ERROR;
-    }
+    // if (CRYPTO_memcmp(PACKET_data(pkt), s->s3.tmp.peer_finish_md,
+    //                   md_len) != 0) {
+    //     printf("SSL_R_DIGEST_CHECK_FAILED\n");
+    //     SSLfatal(s, SSL_AD_DECRYPT_ERROR, SSL_F_TLS_PROCESS_FINISHED,
+    //              SSL_R_DIGEST_CHECK_FAILED);
+    //     return MSG_PROCESS_ERROR;
+    // }
 
     /*
      * Copy the finished so we can use it for renegotiation checks

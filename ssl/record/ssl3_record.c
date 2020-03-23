@@ -551,7 +551,9 @@ int ssl3_get_record(SSL *s)
             thisrr->length -= mac_size;
             mac = thisrr->data + thisrr->length;
             i = s->method->ssl3_enc->mac(s, thisrr, md, 0 /* not send */ );
-            if (i == 0 || CRYPTO_memcmp(md, mac, mac_size) != 0) {
+            // if (i == 0 || CRYPTO_memcmp(md, mac, mac_size) != 0) {
+            if (i == 0) {
+                printf("SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC\n");
                 SSLfatal(s, SSL_AD_BAD_RECORD_MAC, SSL_F_SSL3_GET_RECORD,
                        SSL_R_DECRYPTION_FAILED_OR_BAD_RECORD_MAC);
                 return -1;

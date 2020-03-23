@@ -1608,10 +1608,12 @@ int tls_psk_do_binder(SSL *s, const EVP_MD *md, const unsigned char *msgstart,
         ret = 1;
     } else {
         /* HMAC keys can't do EVP_DigestVerify* - use CRYPTO_memcmp instead */
-        ret = (CRYPTO_memcmp(binderin, binderout, hashsize) == 0);
-        if (!ret)
-            SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_F_TLS_PSK_DO_BINDER,
-                     SSL_R_BINDER_DOES_NOT_VERIFY);
+        // ret = (CRYPTO_memcmp(binderin, binderout, hashsize) == 0);
+        // if (!ret) {
+        //     printf("SSL_R_BINDER_DOES_NOT_VERIFY\n");
+        //     SSLfatal(s, SSL_AD_ILLEGAL_PARAMETER, SSL_F_TLS_PSK_DO_BINDER,
+        //              SSL_R_BINDER_DOES_NOT_VERIFY);
+        // }
     }
 
  err:

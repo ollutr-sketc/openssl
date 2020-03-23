@@ -665,7 +665,7 @@ static SUB_STATE_RETURN read_state_machine(SSL *s)
             st->read_state_work = post_process_message(s, st->read_state_work);
             switch (st->read_state_work) {
             case WORK_ERROR:
-                check_fatal(s, SSL_F_READ_STATE_MACHINE);
+                // check_fatal(s, SSL_F_READ_STATE_MACHINE);
                 /* Fall through */
             case WORK_MORE_A:
             case WORK_MORE_B:

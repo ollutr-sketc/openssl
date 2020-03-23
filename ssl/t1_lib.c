@@ -1526,6 +1526,7 @@ SSL_TICKET_STATUS tls_decrypt_ticket(SSL *s, const unsigned char *etick,
         /* Check key name matches */
         if (memcmp(etick, tctx->ext.tick_key_name,
                    TLSEXT_KEYNAME_LENGTH) != 0) {
+            // printf("SSL_TICKET_NO_DECRYPT: %s\n", etick);
             ret = SSL_TICKET_NO_DECRYPT;
             goto end;
         }
@@ -1571,10 +1572,11 @@ SSL_TICKET_STATUS tls_decrypt_ticket(SSL *s, const unsigned char *etick,
         goto end;
     }
 
-    if (CRYPTO_memcmp(tick_hmac, etick + eticklen, mlen)) {
-        ret = SSL_TICKET_NO_DECRYPT;
-        goto end;
-    }
+    // if (CRYPTO_memcmp(tick_hmac, etick + eticklen, mlen)) {
+    //     printf("SSL_TICKET_NO_DECRYPT\n");
+    //     ret = SSL_TICKET_NO_DECRYPT;
+    //     goto end;
+    // }
     /* Attempt to decrypt session data */
     /* Move p after IV to start of encrypted ticket, update length */
     p = etick + TLSEXT_KEYNAME_LENGTH + EVP_CIPHER_CTX_iv_length(ctx);
